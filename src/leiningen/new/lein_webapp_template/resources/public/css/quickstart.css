@@ -1,0 +1,12 @@
+body {
+    padding-top: 60px;
+}
+
+footer {
+    height: 60px;
+    text-align: center;
+}
+
+footer p {
+    padding-top: 20px;
+}
