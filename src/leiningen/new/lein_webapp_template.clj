@@ -4,7 +4,7 @@
 (def render (renderer "lein-webapp-template"))
 
 (defn lein-webapp-template
-  "Create a new webapp project based on Compojure, Hiccup and Twitter Bootstrap"
+  "Create a new webapp project based on Compojure, Hiccup, Bootstrap and jQuery"
   [name]
   (let [data {:name name
               :sanitized (name-to-path name)}]
