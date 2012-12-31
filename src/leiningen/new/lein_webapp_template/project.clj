@@ -8,4 +8,5 @@
                  [compojure "1.1.3"]
                  [hiccup "1.0.2"]]
   :plugins [[lein-ring "0.7.5"]]
-  :ring {:handler {{name}}.app/site-handler})
+  :ring {:handler {{name}}.app/site-handler}
+  :main {{name}}.server)

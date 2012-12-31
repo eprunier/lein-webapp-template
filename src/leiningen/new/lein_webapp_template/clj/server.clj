@@ -2,10 +2,14 @@
   (:require [ring.adapter.jetty :as jetty]
             [{{name}}.app :as app]))
 
+(defn- http-port [[port]]
+  (if port
+    (Integer/parseInt port)
+    8080))
 
-(defn start []
+(defn -main [& options]
   (println "Starting server...")
-  (let [port 3000
+  (let [port (http-port options)
         server (jetty/run-jetty (var app/site-handler)
                                 {:port port :join? false})]
     (println "Server started on port" port)
