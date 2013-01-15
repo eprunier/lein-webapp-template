@@ -1,15 +1,22 @@
 (ns {{name}}.server
   (:require [ring.adapter.jetty :as jetty]
-            [{{name}}.app :as app]))
+            [{{name}}.app :as app])
+  (:gen-class))
 
-(defn- http-port [[port]]
-  (if port
-    (Integer/parseInt port)
-    8080))
+(defn- add-port [options port]
+  (let [port (if port
+               (Integer/parseInt port)
+               8080)]
+    (assoc options :port port)))
 
-(defn -main [& options]
+(defn- parse-args [[port :as args]]
+  (-> {}
+      (add-port port)))
+
+(defn -main [& args]
   (println "Starting server...")
-  (let [port (http-port options)
+  (let [options (parse-args args)
+        port (:port options)
         server (jetty/run-jetty (var app/site-handler)
                                 {:port port :join? false})]
     (println "Server started on port" port)
