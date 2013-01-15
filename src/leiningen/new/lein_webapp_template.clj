@@ -28,7 +28,8 @@
              ["resources/public/css/bootstrap-responsive.min.css" (render "resources/public/css/bootstrap-responsive.min.css")]
              ["resources/public/css/jquery-ui.min.css" (render "resources/public/css/jquery-ui.min.css")]
              ["resources/public/css/{{name}}.css" (render "resources/public/css/quickstart.css")]
-             "resources/public/img"
+             ["resources/public/img/glyphicons-halflings.png" "resources/public/img/glyphicons-halflings.png"]
+             ["resources/public/img/glyphicons-halflings-white.png" "resources/public/img/glyphicons-halflings-white.png"]
              ["resources/public/js/bootstrap.min.js" (render "resources/public/js/bootstrap.min.js")]
              ["resources/public/js/jquery.min.js" (render "resources/public/js/jquery.min.js")]
              ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")])))
