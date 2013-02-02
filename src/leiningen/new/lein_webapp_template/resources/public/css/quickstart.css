@@ -10,3 +10,8 @@ footer {
 footer p {
     padding-top: 20px;
 }
+
+.right-menu .dropdown-menu {
+    left: auto;
+    right: 0;
+}
