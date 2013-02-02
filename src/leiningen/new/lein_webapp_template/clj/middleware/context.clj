@@ -1,5 +1,4 @@
-(ns {{name}}.middleware.context
-  (:refer-clojure :exclude [get]))
+(ns {{name}}.middleware.context)
 
 (declare ^:dynamic *session*)
 
@@ -13,12 +12,6 @@
       (let [response (handler request)
             session (:session response)]
         (assoc-in response [:session :app-context] @*session*)))))
-
-(defn- put!
-  [destination k v]
-  (swap! destination
-         (fn [session]
-           (assoc session k v))))
 
 (defn session-put!
   "Add or update key/value for the current session"
