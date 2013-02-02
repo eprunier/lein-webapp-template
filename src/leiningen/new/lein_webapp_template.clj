@@ -8,7 +8,7 @@
   [name]
   (let [data {:name name
               :sanitized (name-to-path name)}]
-    (println "Generating the webapp project named" (str name " ..."))
+    (println "Generating the webapp project" (str name "..."))
     (->files data
              [".gitignore" (render ".gitignore" data)]
              ["project.clj" (render "project.clj" data)]
@@ -28,8 +28,9 @@
              ["resources/public/css/bootstrap-responsive.min.css" (render "resources/public/css/bootstrap-responsive.min.css")]
              ["resources/public/css/jquery-ui.min.css" (render "resources/public/css/jquery-ui.min.css")]
              ["resources/public/css/{{name}}.css" (render "resources/public/css/quickstart.css")]
-             ["resources/public/img/glyphicons-halflings.png" "resources/public/img/glyphicons-halflings.png"]
-             ["resources/public/img/glyphicons-halflings-white.png" "resources/public/img/glyphicons-halflings-white.png"]
+             ["resources/public/img/glyphicons-halflings.png" (render "resources/public/img/glyphicons-halflings.png")]
+             ["resources/public/img/glyphicons-halflings-white.png" (render "resources/public/img/glyphicons-halflings-white.png")]
              ["resources/public/js/bootstrap.min.js" (render "resources/public/js/bootstrap.min.js")]
              ["resources/public/js/jquery.min.js" (render "resources/public/js/jquery.min.js")]
-             ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")])))
+             ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")])
+    (println "Project" name "successfully generated")))
