@@ -1,7 +1,19 @@
 (ns leiningen.new.lein-webapp-template
-  (:use [leiningen.new.templates :only [renderer name-to-path ->files]]))
+  (:use [clojure.java.io :as io]
+        [leiningen.new.templates :only [renderer sanitize name-to-path ->files]]))
 
-(def render (renderer "lein-webapp-template"))
+(def ^{:private true :const true} template-name "lein-webapp-template")
+
+(def render (renderer template-name))
+
+(defn get-bytes [resource-path data]
+  (let [path (str "leiningen/new/" (sanitize template-name) "/" resource-path)]
+    (with-open [input (-> (Thread/currentThread)
+                          .getContextClassLoader
+                          (.getResourceAsStream path))
+                output (new java.io.ByteArrayOutputStream)]
+        (io/copy input output)
+        (.toByteArray output))))
 
 (defn lein-webapp-template
   "Create a new webapp project based on Compojure, Hiccup, Bootstrap and jQuery"
@@ -28,8 +40,8 @@
              ["resources/public/css/bootstrap-responsive.min.css" (render "resources/public/css/bootstrap-responsive.min.css")]
              ["resources/public/css/jquery-ui.min.css" (render "resources/public/css/jquery-ui.min.css")]
              ["resources/public/css/{{name}}.css" (render "resources/public/css/quickstart.css")]
-             ["resources/public/img/glyphicons-halflings.png" (render "resources/public/img/glyphicons-halflings.png")]
-             ["resources/public/img/glyphicons-halflings-white.png" (render "resources/public/img/glyphicons-halflings-white.png")]
+             ["resources/public/img/glyphicons-halflings.png" (get-bytes "resources/public/img/glyphicons-halflings.png" data)]
+             ["resources/public/img/glyphicons-halflings-white.png" (get-bytes "resources/public/img/glyphicons-halflings-white.png" data)]
              ["resources/public/js/bootstrap.min.js" (render "resources/public/js/bootstrap.min.js")]
              ["resources/public/js/jquery.min.js" (render "resources/public/js/jquery.min.js")]
              ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")])
