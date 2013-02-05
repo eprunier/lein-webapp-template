@@ -1,17 +1,15 @@
 (ns {{name}}.view.private.admin
   (:require [ring.util.response :as response]
             [compojure.core :refer [defroutes GET]]
-            [{{name}}.view.common :as common]))
+            [{{name}}.view.common :refer [restricted admin? wrap-layout]]))
 
 (defn- page-body []
   [:div
    [:h1 "Admin"]])
 
 (defn- render-page [request]
-  (if (common/admin?)
-    (common/wrap-layout "Admin"
-                        (page-body))
-    (response/redirect "/")))
+  (wrap-layout "Admin"
+               (page-body)))
 
 (defroutes admin-routes
-  (GET "/admin" request (render-page request)))
+  (GET "/admin" request (restricted admin? render-page request)))

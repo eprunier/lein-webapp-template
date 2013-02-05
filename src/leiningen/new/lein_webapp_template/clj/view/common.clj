@@ -1,5 +1,6 @@
 (ns {{name}}.view.common
-  (:require [hiccup.core :as hiccup]
+  (:require [ring.util.response :as response]
+            [hiccup.core :as hiccup]
             [hiccup.page :as page]
             [hiccup.element :as element]
             [{{name}}.util.session :as session]))
@@ -20,6 +21,14 @@
 
 
 ;;; User utils
+(defn restricted
+  "Function for restricted part of the Web site. 
+   Takes a predicate function and the handler to execute if predicate is true."
+  [predicate handler & args]
+  (if (predicate)
+    (apply handler args)
+    (response/redirect "/")))
+
 (defn authenticated?
   "Sample authentication function. Test if current user is not null."
   []
