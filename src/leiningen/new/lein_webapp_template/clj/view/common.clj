@@ -3,7 +3,17 @@
             [hiccup.core :as hiccup]
             [hiccup.page :as page]
             [hiccup.element :as element]
+            [hiccup.util :as util]
             [{{name}}.util.session :as session]))
+
+;;; Context utils
+(defn wrap-context
+  "Add web context to the path of URI"
+  [path]
+  (-> path
+      (util/to-uri)
+      (util/to-str)))
+
 
 ;;; HTML utils
 (defmacro defhtml [name params & content]
@@ -26,18 +36,18 @@
    Takes a predicate function and the handler to execute if predicate is true."
   [predicate handler & args]
   (if (predicate)
-    (apply handler args)
-    (response/redirect "/")))
+     (apply handler args)
+     (response/redirect (wrap-context "/"))))
 
 (defn authenticated?
   "Sample authentication function. Test if current user is not null."
   []
-  (session/current-user))
+  (not (nil? (session/current-user))))
 
 (defn admin?
   "Sample authorization function. Test if current user it admin."
   []
-  (let [user (session/current-user)]
+  (if-let [user (session/current-user)]
     (= :admin (:type user))))
 
 
@@ -74,7 +84,6 @@
                    "/js/jquery.ui.core.min.js"
                    "/js/jquery.ui.datepicker.min.js"
                    "/js/bootstrap.min.js"))
-
 
 ;;; Layout
 (defn wrap-layout
