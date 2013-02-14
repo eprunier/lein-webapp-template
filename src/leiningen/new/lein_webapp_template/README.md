@@ -1,13 +1,13 @@
-# compojure-quickstart
-
-A Clojure library designed to ... well, that part is up to you.
-
-## Usage
+# {{name}}
 
 FIXME
 
+## Usage
+
+   lein run [port]
+
 ## License
 
-Copyright © 2012 FIXME
+Copyright © {{year}} FIXME
 
 Distributed under the Eclipse Public License, the same as Clojure.

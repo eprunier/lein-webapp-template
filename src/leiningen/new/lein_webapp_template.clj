@@ -1,6 +1,6 @@
 (ns leiningen.new.lein-webapp-template
   (:use [clojure.java.io :as io]
-        [leiningen.new.templates :only [renderer sanitize name-to-path ->files]]))
+        [leiningen.new.templates :only [renderer sanitize year ->files]]))
 
 (def ^{:private true :const true} template-name "lein-webapp-template")
 
@@ -19,7 +19,8 @@
   "Create a new webapp project based on Compojure, Hiccup, Bootstrap and jQuery"
   [name]
   (let [data {:name name
-              :sanitized (name-to-path name)}]
+              :sanitized (sanitize name)
+              :year (year)}]
     (println "Generating the webapp project" (str name "..."))
     (->files data
              [".gitignore" (render ".gitignore" data)]
