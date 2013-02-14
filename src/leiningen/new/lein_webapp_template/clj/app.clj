@@ -1,11 +1,16 @@
 (ns {{name}}.app
-  (:require [compojure.core :refer [defroutes routes]]
+  (:require [clojure.core.cache :as cache]
+            [compojure.core :refer [defroutes routes]]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [hiccup.middleware :as hiccup]
+            [stencil.loader :as stencil]
             [{{name}}.middleware.context :as context-manager]))
 
 ;; Initialization
 ; Add required code here (database, etc.)
+(stencil/set-cache (cache/ttl-cache-factory {}))
+;(stencil/set-cache (cache/lru-cache-factory {}))
 
 
 ;; Load public routes
@@ -16,8 +21,8 @@
 (require '[{{name}}.view.auth :refer [auth-routes]])
 
 ;; Load private routes
-(require '[{{name}}.view.private.profile :refer [profile-routes]]
-         '[{{name}}.view.private.admin :refer [admin-routes]])
+(require '[{{name}}.view.profile :refer [profile-routes]]
+         '[{{name}}.view.admin :refer [admin-routes]])
 
 
 ;; Ring handler definition
@@ -30,4 +35,5 @@
               (route/resources "/")
               (route/not-found "<h1>Page not found.</h1>"))
       (context-manager/wrap-context)
+      (hiccup/wrap-base-url)
       (handler/site)))

@@ -1,6 +1,7 @@
 (ns {{name}}.view.auth
   (:require [ring.util.response :as response]
             [compojure.core :refer [defroutes GET POST]]
+            [stencil.core :as stencil]
             [{{name}}.util.session :as session]
             [{{name}}.view.common :refer [wrap-context wrap-layout]]))
 
@@ -11,23 +12,9 @@
                       :type :admin}))
 
 (defn- login-page-body [request]
-  [:div.form-horizontal.login-form
-   [:h2 "Please log in"]
-   [:form {:method "post" :action (wrap-context "/login")}
-    [:div.control-group
-     [:input.input-block-level {:type "text" :name "login" :placeholder "Username or Email"}]]
-    [:div.control-group
-     [:input.input-block-level {:type "password" :name "password" :placeholder "Password"}]]
-    [:div.control-group
-     [:label.checkbox
-      [:input {:type "checkbox" :value "remember-me"}
-       "Remember me"]]]
-    [:div.control-group
-     [:input.btn.btn-primary.pull-right {:type "submit" :value "Log in"}]]]
-   [:div.links
-    [:span
-     [:a {:href ""} "Register"] " - " [:a {:href ""} "Forgot password?"]]]]
-)
+  (stencil/render-file
+   "{{name}}/view/templates/auth"
+   {:form-action (wrap-context "/login")}))
 
 (defn- login-page [request]
   (wrap-layout "Log in"

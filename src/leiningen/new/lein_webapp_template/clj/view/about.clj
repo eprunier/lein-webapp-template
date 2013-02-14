@@ -1,14 +1,14 @@
 (ns {{name}}.view.about
-  (:require [compojure.core :refer [defroutes GET]]
-            [{{name}}.view.common :as common]))
+  (:require [clojure.java.io :as io]
+            [compojure.core :refer [defroutes GET]]
+            [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- page-body [request]
-  [:div
-   [:h1 "About"]])
+  (slurp (io/resource "{{name}}/view/templates/about.html")))
 
 (defn- render-page [request]
-  (common/wrap-layout "About"
-                      (page-body request)))
+  (wrap-layout "About"
+               (page-body request)))
 
 (defroutes about-routes
   (GET "/about" request (render-page request)))

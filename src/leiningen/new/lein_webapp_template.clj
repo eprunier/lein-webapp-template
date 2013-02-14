@@ -12,8 +12,8 @@
                           .getContextClassLoader
                           (.getResourceAsStream path))
                 output (new java.io.ByteArrayOutputStream)]
-        (io/copy input output)
-        (.toByteArray output))))
+      (io/copy input output)
+      (.toByteArray output))))
 
 (defn lein-webapp-template
   "Create a new webapp project based on Compojure, Hiccup, Bootstrap and jQuery"
@@ -34,8 +34,13 @@
              ["src/{{sanitized}}/view/auth.clj" (render "clj/view/auth.clj" data)]
              ["src/{{sanitized}}/view/common.clj" (render "clj/view/common.clj" data)]
              ["src/{{sanitized}}/view/home.clj" (render "clj/view/home.clj" data)]
-             ["src/{{sanitized}}/view/private/admin.clj" (render "clj/view/private/admin.clj" data)]
-             ["src/{{sanitized}}/view/private/profile.clj" (render "clj/view/private/profile.clj" data)]
+             ["src/{{sanitized}}/view/admin.clj" (render "clj/view/admin.clj" data)]
+             ["src/{{sanitized}}/view/profile.clj" (render "clj/view/profile.clj" data)]
+             ["src/{{sanitized}}/view/templates/about.html" (render "clj/view/templates/about.html" data)]
+             ["src/{{sanitized}}/view/templates/admin.mustache" (render "clj/view/templates/admin.mustache" data)]
+             ["src/{{sanitized}}/view/templates/auth.mustache" (render "clj/view/templates/auth.mustache" data)]
+             ["src/{{sanitized}}/view/templates/home.mustache" (render "clj/view/templates/home.mustache" data)]
+             ["src/{{sanitized}}/view/templates/profile.mustache" (render "clj/view/templates/profile.mustache" data)]
              ["resources/public/css/bootstrap.min.css" (render "resources/public/css/bootstrap.min.css")]
              ["resources/public/css/bootstrap-responsive.min.css" (render "resources/public/css/bootstrap-responsive.min.css")]
              ["resources/public/css/jquery-ui.min.css" (render "resources/public/css/jquery-ui.min.css")]

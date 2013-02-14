@@ -6,7 +6,9 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [ring "1.1.6"]
                  [compojure "1.1.3"]
-                 [hiccup "1.0.2"]]
+                 [hiccup "1.0.2"]
+                 [stencil "0.3.1"]]
   :plugins [[lein-ring "0.7.5"]]
   :ring {:handler {{name}}.app/site-handler}
+  :war-resources-path "resources/public"
   :main {{name}}.server)
