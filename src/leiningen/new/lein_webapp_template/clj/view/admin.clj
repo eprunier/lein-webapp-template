@@ -5,7 +5,7 @@
 
 (defn- page-body []
   (stencil/render-file
-   "{{name}}/view/templates/admin"
+   "{{sanitized}}/view/templates/admin"
    {}))
 
 (defn- render-page [request]

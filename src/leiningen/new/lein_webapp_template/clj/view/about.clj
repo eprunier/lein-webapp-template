@@ -4,7 +4,7 @@
             [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- page-body [request]
-  (slurp (io/resource "{{name}}/view/templates/about.html")))
+  (slurp (io/resource "{{sanitized}}/view/templates/about.html")))
 
 (defn- render-page [request]
   (wrap-layout "About"

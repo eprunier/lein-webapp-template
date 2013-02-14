@@ -13,7 +13,7 @@
 
 (defn- login-page-body [request]
   (stencil/render-file
-   "{{name}}/view/templates/auth"
+   "{{sanitized}}/view/templates/auth"
    {:form-action (wrap-context "/login")}))
 
 (defn- login-page [request]

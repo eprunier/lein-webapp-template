@@ -5,7 +5,7 @@
 
 (defn- page-body []
   (stencil/render-file
-   "{{name}}/view/templates/profile"
+   "{{sanitized}}/view/templates/profile"
    {}))
 
 (defn- render-page [request]
