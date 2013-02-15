@@ -3,7 +3,7 @@
 (declare ^:dynamic *session*)
 
 (defn wrap-context
-  "Store request, session and flash into a Clojure map"
+  "Store session into a Clojure map"
   [handler]
   (fn [request]
     (binding [*session* (atom {})]
