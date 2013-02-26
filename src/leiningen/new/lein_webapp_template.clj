@@ -28,8 +28,9 @@
              ["README.md" (render "README.md" data)]
              ["src/{{sanitized}}/server.clj" (render "clj/server.clj" data)]
              ["src/{{sanitized}}/app.clj" (render "clj/app.clj" data)]
-             ["src/{{sanitized}}/middleware/context.clj" (render "clj/middleware/context.clj" data)]
+             ["src/{{sanitized}}/middleware/session.clj" (render "clj/middleware/session.clj" data)]
              ["src/{{sanitized}}/util/session.clj" (render "clj/util/session.clj" data)]
+             ["src/{{sanitized}}/util/flash.clj" (render "clj/util/flash.clj" data)]
              "src/{{sanitized}}/model/"
              ["src/{{sanitized}}/view/about.clj" (render "clj/view/about.clj" data)]
              ["src/{{sanitized}}/view/auth.clj" (render "clj/view/auth.clj" data)]

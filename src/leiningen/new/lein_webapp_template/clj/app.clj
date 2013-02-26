@@ -5,7 +5,8 @@
             [compojure.route :as route]
             [hiccup.middleware :as hiccup]
             [stencil.loader :as stencil]
-            [{{name}}.middleware.context :as context-manager]))
+            [clojure.core.cache :as cache]
+            [{{name}}.middleware.session :as session-manager]))
 
 ;; Initialization
 ; Add required code here (database, etc.)
@@ -34,6 +35,6 @@
               admin-routes
               (route/resources "/")
               (route/not-found "<h1>Page not found.</h1>"))
-      (context-manager/wrap-context)
+      (session-manager/wrap-session)
       (hiccup/wrap-base-url)
       (handler/site)))

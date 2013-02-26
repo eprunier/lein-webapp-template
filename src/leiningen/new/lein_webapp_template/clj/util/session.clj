@@ -1,16 +1,15 @@
 (ns {{name}}.util.session
-  (:require [{{name}}.middleware.context :as context]))
+  (:require [{{name}}.middleware.session :as session-manager]))
 
 (defn set-user! [user]
-  (context/session-put! :user {:login "admin"
-                               :type :admin}))
+  (session-manager/session-put! :user user))
 
 (defn current-user
   "Retrieve current user"
   []
-  (context/session-get :user))
+  (session-manager/session-get :user))
 
 (defn logout
   "Reset session"
   []
-  (context/session-clear))
+  (session-manager/session-clear))
