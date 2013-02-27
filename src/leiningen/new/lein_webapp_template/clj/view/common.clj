@@ -22,7 +22,7 @@
 
 (defhtml dropdown-button [items & [{label :label id :id icon :icon class :class :as options}]]
   [:span {:class "btn-group" :id id}
-   [:a {:class "btn dropdown-toggle" :data-toggle "dropdown" :href (str "#" id)}
+   [:a {:class "btn btn-inverse dropdown-toggle" :data-toggle "dropdown" :href (str "#" id)}
     (when icon
       [:i {:class icon}])
     (str "&nbsp;" label "&nbsp;")
@@ -60,12 +60,12 @@
     [(element/link-to "/profile" "Profile")
      (element/link-to "/logout" "Logout")]
     {:label (:login (session/current-user))
-     :icon "icon-user"})])
+     :icon "icon-user icon-white"})])
 
 (defn- login-button
   "Display authentication action"
   []
-  (element/link-to {:class "btn pull-right"} "/login" "Log in"))
+  (element/link-to {:class "btn btn-inverse pull-right"} "/login" "Log in"))
 
 
 ;;; Resources utils
