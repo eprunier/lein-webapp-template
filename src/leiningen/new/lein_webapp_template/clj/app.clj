@@ -3,10 +3,10 @@
             [compojure.core :refer [defroutes routes]]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [hiccup.middleware :as hiccup]
             [stencil.loader :as stencil]
             [clojure.core.cache :as cache]
-            [{{name}}.middleware.session :as session-manager]))
+            [{{name}}.middleware.session :as session-manager]
+            [{{name}}.middleware.context :as context-manager]))
 
 ;; Initialization
 ; Add required code here (database, etc.)
@@ -36,5 +36,5 @@
               (route/resources "/")
               (route/not-found "<h1>Page not found.</h1>"))
       (session-manager/wrap-session)
-      (hiccup/wrap-base-url)
+      (context-manager/wrap-context-root)
       (handler/site)))

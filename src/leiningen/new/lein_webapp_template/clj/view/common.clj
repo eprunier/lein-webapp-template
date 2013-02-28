@@ -3,16 +3,14 @@
             [hiccup.core :as hiccup]
             [hiccup.page :as page]
             [hiccup.element :as element]
-            [hiccup.util :as util]
-            [{{name}}.util.session :as session]))
+            [{{name}}.util.session :as session]
+            [{{name}}.util.context :as context]))
 
 ;;; Context utils
 (defn wrap-context
   "Add web context to the path of URI"
   [path]
-  (-> path
-      (util/to-uri)
-      (util/to-str)))
+  (context/with-context path))
 
 
 ;;; HTML utils
@@ -57,15 +55,21 @@
   []
   [:div {:class "pull-right right-menu"}
    (dropdown-button
-    [(element/link-to "/profile" "Profile")
-     (element/link-to "/logout" "Logout")]
+    [(-> "/profile"
+         (wrap-context)
+         (element/link-to "Profile"))
+     (-> "/logout"
+         (wrap-context)
+         (element/link-to "Logout"))]
     {:label (:login (session/current-user))
      :icon "icon-user icon-white"})])
 
 (defn- login-button
   "Display authentication action"
   []
-  (element/link-to {:class "btn btn-inverse pull-right"} "/login" "Log in"))
+  (element/link-to {:class "btn btn-inverse pull-right"}
+                   (wrap-context "/login")
+                   "Log in"))
 
 
 ;;; Resources utils
@@ -104,10 +108,10 @@
        [:a.brand "{{name}}"]
        [:div {:class "nav-collapse collapse"}
         (element/ordered-list {:class "nav"}
-                              [(element/link-to "/" "Home")
+                              [(element/link-to (wrap-context "/") "Home")
                                (when (admin?)
-                                 (element/link-to "/admin" "Administration"))
-                               (element/link-to "/about" "About")])
+                                 (element/link-to (wrap-context "/admin") "Administration"))
+                               (element/link-to (wrap-context "/about") "About")])
         (if (authenticated?)
           (profil-menu)
           (login-button))]]]]
