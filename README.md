@@ -1,6 +1,6 @@
 # lein-webapp-template
 
-A Leiningen template for Web apps based on Compojure, Hiccup, Bootstrap and jQuery.
+A Leiningen template for Web apps based on Compojure, Stencil, Bootstrap and jQuery.
 
 ## Usage with Leiningen 2
 
