@@ -3,7 +3,7 @@
             [compojure.core :refer [defroutes GET POST]]
             [stencil.core :as stencil]
             [{{name}}.util.session :as session]
-            [{{name}}.view.common :refer [wrap-context wrap-layout]]))
+            [{{name}}.view.common :refer [wrap-context-root get-context-root wrap-layout]]))
 
 (defn init-test-data
   "Initialise session with dummy data"
@@ -14,7 +14,7 @@
 (defn- login-page-body [request]
   (stencil/render-file
    "{{sanitized}}/view/templates/auth"
-   {:form-action (wrap-context "/login")}))
+   {:context-root (get-context-root)}))
 
 (defn- login-page [request]
   (wrap-layout "Log in"
@@ -22,11 +22,11 @@
 
 (defn- login [request]
   (init-test-data)
-  (response/redirect (wrap-context "/")))
+  (response/redirect (wrap-context-root "/")))
 
 (defn- logout [request]
   (session/logout)
-  (response/redirect (wrap-context "/")))
+  (response/redirect (wrap-context-root "/")))
 
 (defroutes auth-routes
   (GET "/login" request (login-page request))

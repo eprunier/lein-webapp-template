@@ -6,7 +6,6 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [ring "1.1.6"]
                  [compojure "1.1.3"]
-                 [hiccup "1.0.2"]
                  [stencil "0.3.2"]]
   :plugins [[lein-ring "0.7.5"]]
   :ring {:handler {{name}}.app/site-handler}

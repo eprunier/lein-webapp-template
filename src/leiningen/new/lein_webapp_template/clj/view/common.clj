@@ -1,32 +1,18 @@
 (ns {{name}}.view.common
   (:require [ring.util.response :as response]
-            [hiccup.core :as hiccup]
-            [hiccup.page :as page]
-            [hiccup.element :as element]
-            [{{name}}.util.session :as session]
-            [{{name}}.util.context :as context]))
+            [stencil.core :as stencil]
+            [{{name}}.middleware.context :as context]
+            [{{name}}.util.session :as session]))
 
 ;;; Context utils
-(defn wrap-context
+(defn get-context-root
+  []
+  (context/get-context-root))
+
+(defn wrap-context-root
   "Add web context to the path of URI"
   [path]
-  (context/with-context path))
-
-
-;;; HTML utils
-(defmacro defhtml [name params & content]
-  `(defn ~name ~params
-     (hiccup/html ~@content)))
-
-(defhtml dropdown-button [items & [{label :label id :id icon :icon class :class :as options}]]
-  [:span {:class "btn-group" :id id}
-   [:a {:class "btn btn-inverse dropdown-toggle" :data-toggle "dropdown" :href (str "#" id)}
-    (when icon
-      [:i {:class icon}])
-    (str "&nbsp;" label "&nbsp;")
-    [:span {:class "caret"}]]
-   (element/unordered-list {:class "dropdown-menu"} items)])
-
+  (str (get-context-root) path))
 
 ;;; User utils
 (defn restricted
@@ -34,8 +20,8 @@
    Takes a predicate function and the handler to execute if predicate is true."
   [predicate handler & args]
   (if (predicate)
-     (apply handler args)
-     (response/redirect (wrap-context "/"))))
+    (apply handler args)
+    (response/redirect (wrap-context-root "/"))))
 
 (defn authenticated?
   "Sample authentication function. Test if current user is not null."
@@ -48,73 +34,27 @@
   (if-let [user (session/current-user)]
     (= :admin (:type user))))
 
-
-;;; Page utils
-(defn- profil-menu
-  "Display the dropdown menu related to the current user"
-  []
-  [:div {:class "pull-right right-menu"}
-   (dropdown-button
-    [(-> "/profile"
-         (wrap-context)
-         (element/link-to "Profile"))
-     (-> "/logout"
-         (wrap-context)
-         (element/link-to "Logout"))]
-    {:label (:login (session/current-user))
-     :icon "icon-user icon-white"})])
-
-(defn- login-button
-  "Display authentication action"
-  []
-  (element/link-to {:class "btn btn-inverse pull-right"}
-                   (wrap-context "/login")
-                   "Log in"))
-
-
-;;; Resources utils
-(defn- add-css
-  "Add useful css"
-  []
-  (page/include-css "/css/jquery-ui.min.css"
-                    "/css/bootstrap.min.css"
-                    "/css/{{name}}.css"
-                    "/css/bootstrap-responsive.min.css"))
-
-(defn- add-js
-  "Add useful JS"
-  []
-  (page/include-js "/js/jquery.min.js"
-                   "/js/jquery.ui.core.min.js"
-                   "/js/jquery.ui.datepicker.min.js"
-                   "/js/bootstrap.min.js"))
-
 ;;; Layout
+(defn- base-content [title body]
+  {:context-root (context/get-context-root)
+   :title title
+   :body body})
+
+(defn- user-nav-links [user]
+  (when (admin?) 
+    [{:link (wrap-context-root "/admin") :label "Administration"}
+     {:link (wrap-context-root "/") :label "Foo"}]))
+
 (defn wrap-layout
   "Define pages layout"
-  [title & body]
-  (page/html5
-   [:head
-    [:title title]
-    (add-css)]
-   [:body
-    [:div {:class "navbar navbar-inverse navbar-fixed-top"}
-     [:div.navbar-inner
-      [:div.container
-       [:a {:class "btn btn-navbar" :data-toggle "collapse" :data-target ".nav-collapse"}
-        [:span.icon-bar]
-        [:span.icon-bar]
-        [:span.icon-bar]]
-       [:a.brand "{{name}}"]
-       [:div {:class "nav-collapse collapse"}
-        (element/ordered-list {:class "nav"}
-                              [(element/link-to (wrap-context "/") "Home")
-                               (when (admin?)
-                                 (element/link-to (wrap-context "/admin") "Administration"))
-                               (element/link-to (wrap-context "/about") "About")])
-        (if (authenticated?)
-          (profil-menu)
-          (login-button))]]]]
-    [:div#content {:class "container"}
-     body]
-    (add-js)]))
+  [title body]
+  (stencil/render-file
+   "{{sanitized}}/view/templates/layout"
+   (let [content (base-content title body)
+         user (session/current-user)]
+     (if (authenticated?)
+       (assoc content 
+         :authenticated? 
+         {:user (:login user)
+          :nav-links (user-nav-links user)})
+       (assoc content :not-authenticated? {})))))
