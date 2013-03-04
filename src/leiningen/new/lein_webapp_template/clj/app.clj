@@ -4,7 +4,6 @@
             [compojure.handler :as handler]
             [compojure.route :as route]
             [stencil.loader :as stencil]
-            [clojure.core.cache :as cache]
             [{{name}}.middleware.session :as session-manager]
             [{{name}}.middleware.context :as context-manager]))
 
