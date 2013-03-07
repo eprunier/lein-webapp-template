@@ -31,6 +31,6 @@ lein ring uberwar
 
 ## License
 
-Copyright © 2012 Eric Prunier
+Copyright © 2012-2013 Eric Prunier
 
 Distributed under the Eclipse Public License, the same as Clojure.
