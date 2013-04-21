@@ -1,7 +1,7 @@
 (ns {{name}}.view.home
   (:require [compojure.core :refer [defroutes GET]]
             [stencil.core :as stencil]
-            [{{name}}.view.common :as common]))
+            [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- page-body []
   (stencil/render-file
@@ -9,8 +9,8 @@
    {}))
 
 (defn- render-page [request]
-  (common/wrap-layout "Home"
-                      (page-body)))
+  (wrap-layout "Home"
+               (page-body)))
 
 (defroutes home-routes
   (GET "/" request (render-page request)))
