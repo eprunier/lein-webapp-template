@@ -57,4 +57,4 @@
          :authenticated? 
          {:user (:login user)
           :nav-links (user-nav-links user)})
-       (assoc content :not-authenticated? {})))))
+       content))))

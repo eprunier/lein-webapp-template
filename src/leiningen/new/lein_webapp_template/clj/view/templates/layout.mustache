@@ -27,9 +27,9 @@
 	      {{/authenticated?}}
 	      <li><a href="{{context-root}}/about">About</a></li>
 	    </ol>
-	    {{#not-authenticated?}}
+	    {{^authenticated?}}
 	    <a class="btn btn-inverse pull-right" href="{{context-root}}/login">Log in</a>
-	    {{/not-authenticated?}}
+	    {{/authenticated?}}
 	    {{#authenticated?}}
 	    <div class="pull-right right-menu">
 	      <span class="btn-group">
