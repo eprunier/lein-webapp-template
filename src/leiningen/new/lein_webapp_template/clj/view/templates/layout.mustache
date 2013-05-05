@@ -18,7 +18,7 @@
 	  </a>
 	  <a class="brand">Name</a>
 	  <div class="nav-collapse collapse">
-	    <ol class="nav">
+	    <ul class="nav">
 	      <li><a href="{{context-root}}/">Home</a></li>
 	      {{#authenticated?}}
 	      {{#nav-links}}
@@ -26,14 +26,14 @@
 	      {{/nav-links}}
 	      {{/authenticated?}}
 	      <li><a href="{{context-root}}/about">About</a></li>
-	    </ol>
-	    {{^authenticated?}}
-	    <a class="btn btn-inverse pull-right" href="{{context-root}}/login">Log in</a>
-	    {{/authenticated?}}
-	    {{#authenticated?}}
-	    <div class="pull-right right-menu">
-	      <span class="btn-group">
-		<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+	    </ul>
+	    <ul class="nav pull-right">
+	      {{^authenticated?}}
+	      <li><a href="{{context-root}}/login">Log in</a></li>
+	      {{/authenticated?}}
+	      {{#authenticated?}}
+	      <li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 		  <i class="icon-user icon-white"></i>
 		  <span style="margin: 0 5px;">{{user}}</span>
 		  <span class="caret"></span>
@@ -42,9 +42,9 @@
 		  <li><a href="{{context-root}}/profile">Profile</a></li>
 		  <li><a href="{{context-root}}/logout">Logout</a></li>
 		</ul>
-	      </span>
-	    </div>
-	    {{/authenticated?}}
+	      </li>
+	      {{/authenticated?}}
+	    </ul>
 	  </div>
 	</div>
       </div>
