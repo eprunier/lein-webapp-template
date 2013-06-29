@@ -39,7 +39,7 @@
              ["src/{{sanitized}}/middleware/context.clj" (render "clj/middleware/context.clj" data)]
              ["src/{{sanitized}}/util/session.clj" (render "clj/util/session.clj" data)]
              ["src/{{sanitized}}/util/flash.clj" (render "clj/util/flash.clj" data)]
-             "src/{{sanitized}}/model/"
+             ["src/{{sanitized}}/service/linkedin.clj" (render "clj/service/linkedin.clj" data)]
              ["src/{{sanitized}}/view/about.clj" (render "clj/view/about.clj" data)]
              ["src/{{sanitized}}/view/auth.clj" (render "clj/view/auth.clj" data)]
              ["src/{{sanitized}}/view/common.clj" (render "clj/view/common.clj" data)]

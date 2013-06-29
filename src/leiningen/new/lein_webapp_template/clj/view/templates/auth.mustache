@@ -1,5 +1,10 @@
 <div class="form-horizontal login-form">
   <h2>Please log in</h2>
+  {{#flash}}
+  <div class="alert alert-error">
+    {{error}}
+  </div>
+  {{/flash}}
   <form method="post" action="{{context-root}}/login">
     <div class="control-group">
       <input type="text" name="login" placeholder="Username or Email" class="input-block-level" />
@@ -21,4 +26,11 @@
       <span><a href="" >Register</a> - <a href="">Forgot password?</a></span>
     </div>
   </form>
+  <hr />
+  <h2>Or use</h2>
+  <div>
+    <form method="post" action="{{linkedin-url}}">
+      <input type="submit" value="LinkedIn" class="btn btn-large" />
+    </form>
+  </div>
 </div>

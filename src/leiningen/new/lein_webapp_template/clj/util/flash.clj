@@ -1,13 +1,13 @@
 (ns {{name}}.util.flash
-  (:refer-clojure :exclude [get])
-  (:require [{{name}}.middleware.session :as session-manager]))
+    (:refer-clojure :exclude [get])
+    (:require [{{name}}.middleware.session :as session-manager]))
 
 (defn put!
-  "Put key/value in flash"
-  [k v]
-  (session-manager/flash-put! k v))
+  "Put key/value in flash."
+  [key value]
+  (session-manager/flash-put! key value))
 
 (defn get
-  "Retrieve a flash value"
-  [k]
-  (session-manager/flash-get k))
+  "Retrieve a flash value."
+  [key]
+  (session-manager/flash-get key))
