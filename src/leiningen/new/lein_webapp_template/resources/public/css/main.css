@@ -1,37 +1,28 @@
 body {
+    background-color: #EEE;
     padding-top: 60px;
 }
 
-footer {
-    height: 60px;
+.jumbotron {
+    padding-top: 20px;
     text-align: center;
 }
 
-footer p {
-    padding-top: 20px;
-}
-
-.right-menu .dropdown-menu {
-    left: auto;
-    right: 0;
-}
-
 .login-form {
-    width: 350px; 
+    background-color: #F5F5F5;
+    width: 450px; 
     margin: 50px auto; 
     padding: 10px 40px 20px 40px; 
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0px 0px 4px #eee;
 }
 
 .login-form h2 {
     margin-bottom: 20px;
 }
 
-.login-form .links {
-    padding-top: 20px;
-    text-align: center;
+.login-form .checkbox {
+    font-weight: normal;
 }
 
 .login-form input[type="text"], 
@@ -39,4 +30,28 @@ footer p {
     font-size: 16px;
     height: auto;
     padding: 7px 9px;
+}
+
+.login-form .social-auth {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid gray;
+}
+
+.login-form .social-auth:before {
+    position: absolute;
+    left: 50%;
+    margin: -41px 0 0 -7px;
+    padding: 0 3px;
+    background-color: #F5F5F5;
+    content: "or";
+}
+
+.login-form .social-auth:after {
+    clear: both;
+}
+
+.footer {
+    padding: 30px 0;
+    color: #999;
 }

@@ -1,36 +1,36 @@
-<div class="form-horizontal login-form">
-  <h2>Please log in</h2>
-  {{#flash}}
-  <div class="alert alert-error">
-    {{error}}
-  </div>
-  {{/flash}}
-  <form method="post" action="{{context-root}}/login">
-    <div class="control-group">
-      <input type="text" name="login" placeholder="Username or Email" class="input-block-level" />
+<div class="login-form">
+  <form role="form" method="post" action="{{context-root}}/login">
+    <h2>Sign in</h2>
+    {{#flash}}
+    <div class="alert alert-error">
+      {{error}}
     </div>
-    <div class="control-group">
-      <input type="password" name="password" placeholder="Password" class="input-block-level" />
+    {{/flash}}
+
+    <div class="form-group">
+      <label>Username or Email</label>
+      <input type="text" class="form-control" name="login" />
     </div>
-    <div class="control-group">
-      <label class="checkbox">
-	<input type="checkbox" value="remember-me">
-	Remember me
-	</input>
-      </label>
+
+    <div class="form-group">
+      <label>Password (<a href="">forgot your password?</a>)</label>
+      <input type="password" class="form-control" name="password" />
     </div>
-    <div class="control-group">
-      <input type="submit" value="Log in" class="btn btn-inverse btn-large pull-right" />
-    </div>
-    <div class="links">
-      <span><a href="" >Register</a> - <a href="">Forgot password?</a></span>
+
+    <label class="checkbox">
+      <input type="checkbox" value="remember-me">Remember me</input>
+    </label>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
     </div>
   </form>
-  <hr />
-  <h2>Or use</h2>
-  <div>
+  
+  <div class="social-auth">
     <form method="post" action="{{linkedin-url}}">
-      <input type="submit" value="LinkedIn" class="btn btn-large" />
+      <button type="submit" value="LinkedIn" class="btn btn-default btn-lg social linkedin">
+	<img src="{{context-root}}/img/linkedin.png" />
+	LinkedIn
+      </button>
     </form>
   </div>
 </div>
