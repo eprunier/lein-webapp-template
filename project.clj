@@ -1,4 +1,4 @@
-(defproject lein-webapp-template/lein-template "1.5.0-SNAPSHOT"
+(defproject lein-webapp-template/lein-template "1.5.0"
   :description "A Leiningen template for Web apps based on Compojure, Stencil, Bootstrap and jQuery"
   :url "https://github.com/eprunier/lein-webapp-template"
   :license {:name "Eclipse Public License"
