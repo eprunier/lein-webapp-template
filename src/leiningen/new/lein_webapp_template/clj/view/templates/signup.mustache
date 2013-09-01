@@ -1,0 +1,42 @@
+<div class="login-form">
+  <form role="form" method="post" action="{{context-root}}/signup">
+    <h2>Sign up</h2>
+    {{#flash}}
+    <div class="alert alert-error">
+      {{error}}
+    </div>
+    {{/flash}}
+
+    {{#signup-result}}
+    <div class="alert alert-info">
+      {{signup-result}}
+    </div>
+    {{/signup-result}}
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" name="username" />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" name="email" />
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" name="password" />
+    </div>
+
+    <div class="form-group">
+      <label>Password (check)</label>
+      <input type="password" class="form-control" name="password" />
+    </div>
+
+    <div class="form-group">
+      <button type="submit" id="signup" class="btn btn-primary btn-lg btn-block">Sign up</button>
+    </div>
+  </form>
+</div>
+
+<script src="{{context-root}}/js/views/signup.js" type="text/javascript">

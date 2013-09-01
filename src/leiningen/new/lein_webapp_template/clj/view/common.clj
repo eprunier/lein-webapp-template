@@ -42,8 +42,7 @@
 
 (defn- user-nav-links [user]
   (when (admin?) 
-    [{:link (wrap-context-root "/admin") :label "Administration"}
-     {:link (wrap-context-root "/") :label "Foo"}]))
+    [{:link (wrap-context-root "/admin") :label "Administration"}]))
 
 (defn wrap-layout
   "Define pages layout"

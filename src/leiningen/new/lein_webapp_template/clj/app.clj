@@ -17,11 +17,12 @@
 (require '[{{name}}.view.home :refer [home-routes]]
          '[{{name}}.view.about :refer [about-routes]])
 
-;; Load authentication routes
+;; Load registration and authentication routes
 (require '[{{name}}.view.auth :refer [auth-routes]])
 
 ;; Load private routes
 (require '[{{name}}.view.profile :refer [profile-routes]]
+         '[{{name}}.view.settings :refer [settings-routes]]
          '[{{name}}.view.admin :refer [admin-routes]])
 
 
@@ -31,6 +32,7 @@
               about-routes
               auth-routes
               profile-routes
+              settings-routes
               admin-routes
               (route/resources "/")
               (route/not-found "<h1>Page not found.</h1>"))

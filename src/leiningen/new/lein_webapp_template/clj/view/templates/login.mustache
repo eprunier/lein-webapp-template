@@ -1,6 +1,6 @@
 <div class="login-form">
   <form role="form" method="post" action="{{context-root}}/login">
-    <h2>Sign in</h2>
+    <h2>Log in</h2>
     {{#flash}}
     <div class="alert alert-error">
       {{error}}
@@ -17,20 +17,8 @@
       <input type="password" class="form-control" name="password" />
     </div>
 
-    <label class="checkbox">
-      <input type="checkbox" value="remember-me">Remember me</input>
-    </label>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
     </div>
   </form>
-  
-  <div class="social-auth">
-    <form method="post" action="{{linkedin-url}}">
-      <button type="submit" value="LinkedIn" class="btn btn-default btn-lg social linkedin">
-	<img src="{{context-root}}/img/LinkedIn.png" />
-	LinkedIn
-      </button>
-    </form>
-  </div>
 </div>

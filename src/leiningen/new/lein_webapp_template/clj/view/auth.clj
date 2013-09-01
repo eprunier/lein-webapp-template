@@ -4,10 +4,25 @@
               [stencil.core :as stencil]
               [{{name}}.util.session :as session]
               [{{name}}.util.flash :as flash]
-              [{{name}}.view.common :refer [wrap-context-root get-context-root wrap-layout]]
-              [{{name}}.service.linkedin :as linkedin]))
+              [{{name}}.view.common :refer [wrap-context-root wrap-layout authenticated?]]))
 
-(def ^:const REDIRECT-TO (str "http://localhost:8080"))
+(defn- signup-page
+  "Render the signup page."
+  [request]
+  (wrap-layout
+   "Sign up"
+   (stencil/render-file
+    "{{sanitized}}/view/templates/signup"
+    {})))
+
+(defn- signup
+  "Process account creation."
+  [request]
+  (wrap-layout
+   "Sign up"
+   (stencil/render-file
+    "{{sanitized}}/view/templates/signup"
+    {:signup-result "Sign up request recorded. Please check you emails to validate your account."})))
 
 (defn- login-page
   "Render the login page."
@@ -15,12 +30,8 @@
   (wrap-layout
    "Log in"
    (stencil/render-file
-    "{{sanitized}}/view/templates/auth"
-    (let [context-root (get-context-root)
-          linkedin-state (linkedin/new-state)]
-      (session/put! :linkedin-state linkedin-state)
-      {:context-root context-root
-       :linkedin-url (linkedin/auth-uri linkedin-state)}))))
+    "{{sanitized}}/view/templates/login"
+    {})))
 
 (defn- init-test-data
   "Initialise session with dummy data"
@@ -34,42 +45,10 @@
   (init-test-data)
   (response/redirect (wrap-context-root "/")))
 
-(defn- process-linkedin-error
-  []
-  (flash/put! :error "Authentication failed")
-  (response/redirect (wrap-context-root "/login")))
-
-(defn- process-linkedin-success
-  [authorization-code]
-  (let [access-token (linkedin/get-access-token authorization-code)
-        {:keys [firstName lastName] :as user} (linkedin/fetch-user access-token)]
-    (session/put! :linkedin-token access-token)
-    (session/set-user! {:login (str firstName " " lastName)
-                        :type :user}))
-  (response/redirect (wrap-context-root "/")))
-
-(defn- linkedin-login
-  "Process LinkedIn authentication."
-  [{:keys [params] :as request}]
-  (let [{:keys [code state error error_description]} params
-        session-state (session/get :linkedin-state)]
-    (if (or error
-            (and (not (nil? session-state))
-                 (not= session-state state)))
-      (process-linkedin-error)
-      (process-linkedin-success code))))
-
-(defn- twitter-login
-  "Process Twitter authentication."
+(defn check-session
   [request]
-  ;; TODO
-  )
-
-(defn- facebook-login
-  "Process Facebook authentication."
-  [request]
-  ;; TODO
-  )
+  (when (authenticated?)
+    "active"))
 
 (defn- logout
   [request]
@@ -77,11 +56,9 @@
   (response/redirect (wrap-context-root "/")))
 
 (defroutes auth-routes
+  (GET "/signup" request (signup-page request))
+  (POST "/signup" request (signup request))
   (GET "/login" request (login-page request))
   (POST "/login" request (login request))
-
-  (GET "/linkedin" request (linkedin-login request))
-  (GET "/twitter" request (twitter-login request))
-  (GET "/facebook" request (facebook-login request))
-  
+  (GET "/check-session" request (check-session request))
   (GET "/logout" request (logout request)))
