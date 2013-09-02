@@ -51,6 +51,7 @@
              ["src/{{sanitized}}/view/templates/admin.mustache" (render "clj/view/templates/admin.mustache")]
              ["src/{{sanitized}}/view/templates/login.mustache" (render "clj/view/templates/login.mustache")]
              ["src/{{sanitized}}/view/templates/signup.mustache" (render "clj/view/templates/signup.mustache")]
+             ["src/{{sanitized}}/view/templates/reset-pass.mustache" (render "clj/view/templates/reset-pass.mustache")]
              ["src/{{sanitized}}/view/templates/index.mustache" (render "clj/view/templates/index.mustache")]
              ["src/{{sanitized}}/view/templates/home.mustache" (render "clj/view/templates/home.mustache")]
              ["src/{{sanitized}}/view/templates/profile.mustache" (render "clj/view/templates/profile.mustache")]
@@ -65,5 +66,7 @@
              ["resources/public/js/jquery.min.js" (render "resources/public/js/jquery.min.js")]
              ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")]
              ["resources/public/js/common.js" (render "resources/public/js/common.js")]
-             ["resources/public/js/views/signup.js" (render "resources/public/js/views/signup.js")])
+             ["resources/public/js/views/signup.js" (render "resources/public/js/views/signup.js")]
+             ["resources/public/js/views/login.js" (render "resources/public/js/views/login.js")]
+             ["resources/public/js/views/reset-pass.js" (render "resources/public/js/views/reset-pass.js")])
     (println "Project" name "successfully generated")))

@@ -8,7 +8,7 @@ body {
     text-align: center;
 }
 
-.login-form {
+.auth-form {
     background-color: #F5F5F5;
     width: 450px; 
     margin: 50px auto; 
@@ -17,38 +17,15 @@ body {
     border-radius: 5px;
 }
 
-.login-form h2 {
+.auth-form h2 {
     margin-bottom: 20px;
 }
 
-.login-form .checkbox {
-    font-weight: normal;
-}
-
-.login-form input[type="text"], 
-.login-form input[type="password"] {
+.auth-form input[type="text"], 
+.auth-form input[type="password"] {
     font-size: 16px;
     height: auto;
     padding: 7px 9px;
-}
-
-.login-form .social-auth {
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid gray;
-}
-
-.login-form .social-auth:before {
-    position: absolute;
-    left: 50%;
-    margin: -41px 0 0 -7px;
-    padding: 0 3px;
-    background-color: #F5F5F5;
-    content: "or";
-}
-
-.login-form .social-auth:after {
-    clear: both;
 }
 
 .footer {

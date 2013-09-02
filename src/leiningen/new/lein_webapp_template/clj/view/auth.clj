@@ -16,13 +16,12 @@
     {})))
 
 (defn- signup
-  "Process account creation."
+  "Process account creation.
+   if success : retuns 'ok'
+   if error : returns a message to be displayed to the user"
   [request]
-  (wrap-layout
-   "Sign up"
-   (stencil/render-file
-    "{{sanitized}}/view/templates/signup"
-    {:signup-result "Sign up request recorded. Please check you emails to validate your account."})))
+  ;; TODO : process sign up and return "ok" if success
+  "ok")
 
 (defn- login-page
   "Render the login page."
@@ -33,24 +32,43 @@
     "{{sanitized}}/view/templates/login"
     {})))
 
-(defn- init-test-data
-  "Initialise session with dummy data"
-  []
+(defn- auth
+  "Initialise session with dummy data."
+  [request]
+  ;; TODO : replace with the authentication process
   (session/set-user! {:login "admin"
                       :type :admin}))
 
 (defn- login
-  "Process login with username/password."
+  "Process user login with username/password."
   [request]
-  (init-test-data)
-  (response/redirect (wrap-context-root "/")))
+  (auth request)
+  "ok")
 
-(defn check-session
+(defn- reset-pass-page
+  "Render the reset password page."
+  [request]
+  (wrap-layout
+   "Reset password"
+   (stencil/render-file
+    "{{sanitized}}/view/templates/reset-pass"
+    {})))
+
+(defn- reset-pass
+  "Reset the user password.
+   if success : retuns 'ok'
+   if error : returns a message to be displayed to the user"
+  [request]
+  "ok")
+
+(defn- check-session
+  "Check session and returns 'valid' if it is."
   [request]
   (when (authenticated?)
-    "active"))
+    "valid"))
 
 (defn- logout
+  "Process user logout."
   [request]
   (session/logout)
   (response/redirect (wrap-context-root "/")))
@@ -60,5 +78,7 @@
   (POST "/signup" request (signup request))
   (GET "/login" request (login-page request))
   (POST "/login" request (login request))
+  (GET "/reset-pass" request (reset-pass-page request))
+  (POST "/reset-pass" request (reset-pass request))
   (GET "/check-session" request (check-session request))
   (GET "/logout" request (logout request)))
