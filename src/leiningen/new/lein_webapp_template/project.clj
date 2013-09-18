@@ -9,6 +9,8 @@
                  [stencil "0.3.2"]
                  [clj-http "0.7.3"]
                  [cheshire "5.2.0"]]
+  :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.4"]]
+                   :source-paths ["dev"]}}
   :plugins [[lein-ring "0.8.5"]]
   :ring {:handler {{name}}.app/site-handler}
   :main {{name}}.server)

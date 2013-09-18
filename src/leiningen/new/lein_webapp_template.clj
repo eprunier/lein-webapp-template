@@ -33,6 +33,8 @@
              [".gitignore" (render ".gitignore" data)]
              ["project.clj" (render "project.clj" data)]
              ["README.md" (render "README.md" data)]
+             ["dev/user.clj" (render "dev/user.clj" data)]
+             ["src/{{sanitized}}.clj" (render "system.clj" data)]
              ["src/{{sanitized}}/server.clj" (render "clj/server.clj" data)]
              ["src/{{sanitized}}/app.clj" (render "clj/app.clj" data)]
              ["src/{{sanitized}}/middleware/session.clj" (render "clj/middleware/session.clj" data)]
