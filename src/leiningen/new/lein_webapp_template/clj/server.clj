@@ -14,5 +14,6 @@
       server)))
 
 (defn stop [instance]
-  (.stop instance)
+  (when instance
+    (.stop instance))
   (println "Server stopped"))
