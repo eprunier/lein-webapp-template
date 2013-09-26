@@ -6,7 +6,7 @@ FIXME
 Launch the application by issuing one of the following commands:
 
 ```shell
-lein run <port>
+lein run [host <host>] [port <port>]
 ```
 
 You can generate a standalone jar and run it:
