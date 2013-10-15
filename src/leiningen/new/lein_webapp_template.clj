@@ -63,7 +63,6 @@
              ["resources/public/css/jquery-ui.min.css" (render "resources/public/css/jquery-ui.min.css")]
              ["resources/public/css/main.css" (render "resources/public/css/main.css")]
              ["resources/public/fonts/glyphicons-halflings-regular.ttf" (render "resources/public/fonts/glyphicons-halflings-regular.ttf")]
-             ["resources/public/img/LinkedIn.png" (render "resources/public/img/LinkedIn.png")]
              ["resources/public/js/bootstrap.min.js" (render "resources/public/js/bootstrap.min.js")]
              ["resources/public/js/jquery.min.js" (render "resources/public/js/jquery.min.js")]
              ["resources/public/js/jquery.ui.core.min.js" (render "resources/public/js/jquery.ui.core.min.js")]
