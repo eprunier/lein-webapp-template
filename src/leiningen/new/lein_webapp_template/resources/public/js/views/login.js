@@ -7,7 +7,7 @@ $(document).ready(function() {
  * and display a modal popup with the result.
  */
 function login() {
-    var requestData = "?username=" + $("#username").val();
+    var requestData = "username=" + $("#username").val();
     requestData += "&password=" + $("#password").val();
 
     $.ajax({

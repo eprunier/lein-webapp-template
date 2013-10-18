@@ -8,7 +8,7 @@ $(document).ready(function() {
  * and display a modal popup with the result.
  */
 function signup() {
-    var requestData = "?username=" + $("#username").val();
+    var requestData = "username=" + $("#username").val();
     requestData += "&email=" + $("#email").val();
     requestData += "&password=" + $("#password").val();
     requestData += "&password-check=" + $("#password-check").val();
