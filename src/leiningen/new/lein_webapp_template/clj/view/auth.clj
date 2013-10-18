@@ -4,6 +4,7 @@
               [stencil.core :as stencil]
               [{{name}}.util.session :as session]
               [{{name}}.util.flash :as flash]
+              [{{name}}.service.db :as db]
               [{{name}}.view.common :refer [wrap-context-root wrap-layout authenticated?]]))
 
 (defn- signup-page
@@ -21,7 +22,13 @@
    if error : returns a message to be displayed to the user"
   [request]
   ;; TODO : process sign up and return "ok" if success
-  "ok")
+  (let [params (:params request)
+        user {:id (:username params)
+              :email (:email params)
+              :type :user}]
+    (if (db/add-user user)
+      "ok"
+      (str "The username " (:username params) " is already used."))))
 
 (defn- login-page
   "Render the login page."
@@ -36,14 +43,22 @@
   "Initialise session with dummy data."
   [request]
   ;; TODO : replace with the authentication process
-  (session/set-user! {:login "admin"
-                      :type :admin}))
+  (let [user (db/get-user (-> request
+                              :params
+                              :username))]
+    (when user
+      (session/set-user! {:login (:id user)
+                          :type (:type user)})
+      user)))
 
 (defn- login
-  "Process user login with username/password."
+  "Process user login with username/password.
+   if success : retuns 'ok'
+   if error : returns a message to be displayed to the user"
   [request]
-  (auth request)
-  "ok")
+  (if (auth request)
+    "ok"
+    "Authentication failed. Please check your username and password."))
 
 (defn- reset-pass-page
   "Render the reset password page."
