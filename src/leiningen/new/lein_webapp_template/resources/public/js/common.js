@@ -14,16 +14,16 @@ function requireSession(fn) {
     document.body.style.cursor = "progress";
     $.ajax({
 	type : "GET",
-	url : "check-session",
+	url : getContextRoot() + "check-session",
 	success : function(result) {
 	    if (result == "valid") {
 		fn();
 	    } else {
-		redirect("/");
+		redirect(getContextRoot() + "/");
 	    }
 	},
 	error : function(e) {
-	    redirect("/");
+	    redirect(getContextRoot() + "/");
 	}
     });
 }
