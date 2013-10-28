@@ -7,23 +7,26 @@
             [{{name}}.middleware.session :as session-manager]
             [{{name}}.middleware.context :as context-manager]))
 
-;; Initialization
-; Add required code here (database, etc.)
+;;; Initialization
+;; Add required code here (database, etc.)
 (stencil/set-cache (cache/ttl-cache-factory {}))
-;(stencil/set-cache (cache/lru-cache-factory {}))
+;;(stencil/set-cache (cache/lru-cache-factory {}))
 
 
-;; Load public routes
+;;; Load public routes
 (require '[{{name}}.view.home :refer [home-routes]]
          '[{{name}}.view.about :refer [about-routes]])
 
-;; Load registration and authentication routes
+;;; Load registration and authentication routes
 (require '[{{name}}.view.auth :refer [auth-routes]])
 
-;; Load private routes
+;;; Load generic routes
 (require '[{{name}}.view.profile :refer [profile-routes]]
          '[{{name}}.view.settings :refer [settings-routes]]
          '[{{name}}.view.admin :refer [admin-routes]])
+
+;;; Load website routes
+;; Add your routes here
 
 
 ;; Ring handler definition
