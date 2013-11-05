@@ -26,9 +26,11 @@
         user {:id (:username params)
               :email (:email params)
               :type :user}]
-    (if (db/add-user user)
-      "ok"
-      (str "The username " (:username params) " is already used."))))
+    (if (clojure.string/blank? (:id user))
+      "The username can't be blank."
+      (if (db/add-user user)
+        "ok"
+        (str "The username " (:username params) " is already used.")))))
 
 (defn- login-page
   "Render the login page."
