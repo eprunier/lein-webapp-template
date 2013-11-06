@@ -1,7 +1,23 @@
 $(document).ready(function() {
-    $("#signup").on("click", signup);
-    $("#success-close-modal").on("click", closeModalSuccess);
+    configureSignupActions();
+    configurePopinActions();
 });
+
+/**
+ * Configure actions associated with account creation.
+ */
+function configureSignupActions() {
+    $("#signup").on("click", signup);
+
+    $("input").keypress(function(e) {
+	if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+	    signup();
+	    return false;
+	} else {
+	    return true;
+	}
+    });
+}
 
 /**
  * Send the signup request to the server with an Ajax call
@@ -20,15 +36,15 @@ function signup() {
 	success : function(result) {
 	    if (result == "ok") {
 		$("#success-message").html("Thank you for your registration.");
-		$('#modal-signup-success').modal("show");
+		$("#popin-signup-success").modal("show");
 	    } else {
 		$("#error-message").html(result);
-		$('#modal-signup-error').modal("show");
+		$("#popin-signup-error").modal("show");
 	    }
 	},
 	error: function() {
 	    $("#error-message").html("An error occurred. Please try again in a few moment.");
-	    $('#modal-signup-error').modal("show");
+	    $("#popin-signup-error").modal("show");
 	},
 	complete : function() {
 	    document.body.style.cursor = "default";
@@ -36,10 +52,17 @@ function signup() {
     });
 }
 
-/**
- * Close the modal popup and redirect user to login page.
+/** 
+ * Configure actions associated with confirmation/error popin.
  */
-function closeModalSuccess() {
-    $('#modal-signup-success').modal("show");
+function configurePopinActions() {
+    $("#success-close-modal").on("click", closePopinSuccess);
+}
+
+/**
+ * Close the popin after success and redirect user to login page.
+ */
+function closePopinSuccess() {
+    $("#popin-signup-success").modal("show");
     redirect("/login");
 }
