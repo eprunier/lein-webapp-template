@@ -54,6 +54,6 @@
      (if (authenticated?)
        (assoc content 
          :authenticated? 
-         {:user (:login user)
+         {:user (:username user)
           :nav-links (user-nav-links user)})
        content))))

@@ -23,14 +23,15 @@
   [request]
   ;; TODO : process sign up and return "ok" if success
   (let [params (:params request)
-        user {:id (:username params)
+        username (:username params)
+        user {:username username
               :email (:email params)
               :type :user}]
-    (if (clojure.string/blank? (:id user))
+    (if (clojure.string/blank? username)
       "The username can't be blank."
       (if (db/add-user user)
         "ok"
-        (str "The username " (:username params) " is already used.")))))
+        (str "The username " username " is already used.")))))
 
 (defn- login-page
   "Render the login page."
@@ -49,8 +50,7 @@
                               :params
                               :username))]
     (when user
-      (session/set-user! {:login (:id user)
-                          :type (:type user)})
+      (session/set-user! (select-keys user [:username :type]))
       user)))
 
 (defn- login
