@@ -32,15 +32,17 @@
   "Sample authorization function. Test if current user it admin."
   []
   (if-let [user (session/current-user)]
-    (= :admin (:type user))))
+    (= :admin (keyword (:type user)))))
 
 ;;; Layout
-(defn- base-content [title body]
+(defn- base-content
+  [title body]
   {:context-root (context/get-context-root)
    :title title
    :body body})
 
-(defn- user-nav-links [user]
+(defn- user-nav-links 
+  []
   (when (admin?) 
     [{:link (wrap-context-root "/admin") :label "Administration"}]))
 
@@ -55,5 +57,5 @@
        (assoc content 
          :authenticated? 
          {:user (:username user)
-          :nav-links (user-nav-links user)})
+          :nav-links (user-nav-links)})
        content))))
