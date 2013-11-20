@@ -3,15 +3,15 @@
             [{{name}}.app :as app])
   (:gen-class))
 
-(defn -main [& {:as args}]
-  (let [{:keys [host port]
-         :or {host "localhost" port "8080"}} (clojure.walk/keywordize-keys args)]
-    (println "Starting server...")
-    (let [server (jetty/run-jetty (var app/site-handler)
-                                  {:host host :port (Integer/parseInt port) :join? false})]
-      (println "Server started")
-      (println (str "You can view the site at http://" host ":" port))
-      server)))
+(defn start [system]
+  (println "Starting server...")
+  (let [server (jetty/run-jetty (var app/site-handler)
+                                {:host (:host system) 
+                                 :port (Integer/parseInt (:port system)) 
+                                 :join? false})]
+    (println "Server started")
+    (println (str "You can view the site at http://" (:host system) ":" (:port system)))
+    server))
 
 (defn stop [instance]
   (when instance
