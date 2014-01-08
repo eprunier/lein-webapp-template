@@ -5,7 +5,7 @@
   "Gives the default parameters for the system to run."
   []
   {:host "localhost"
-   :port "8080"
+   :port 8080
    :server nil})
 
 (defn start
@@ -35,5 +35,5 @@
   (let [{:keys [host port]} (clojure.walk/keywordize-keys args)]
     (-> (system)
         (set-config :host host)
-        (set-config :port port)
+        (set-config :port (Integer/parseInt port))
         start)))

@@ -7,7 +7,7 @@
   (println "Starting server...")
   (let [server (jetty/run-jetty (var app/site-handler)
                                 {:host (:host system) 
-                                 :port (Integer/parseInt (:port system)) 
+                                 :port (:port system) 
                                  :join? false})]
     (println "Server started")
     (println (str "You can view the site at http://" (:host system) ":" (:port system)))
