@@ -3,7 +3,6 @@
               [compojure.core :refer [defroutes GET POST]]
               [stencil.core :as stencil]
               [{{name}}.util.session :as session]
-              [{{name}}.util.flash :as flash]
               [{{name}}.service.db :as db]
               [{{name}}.view.common :refer [wrap-context-root wrap-layout authenticated?]]))
 

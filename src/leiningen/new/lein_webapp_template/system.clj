@@ -11,7 +11,6 @@
 (defn start
   "Start the system."
   [system]
-  (println "system:" system)
   (let [server (server/start system)]
     (assoc system :server server)))
 
@@ -35,5 +34,7 @@
   (let [{:keys [host port]} (clojure.walk/keywordize-keys args)]
     (-> (system)
         (set-config :host host)
-        (set-config :port (Integer/parseInt port))
+        (set-config :port (if (string? port)
+                            (Integer/parseInt port)
+                            port))
         start)))
