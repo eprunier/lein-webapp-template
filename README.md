@@ -12,7 +12,7 @@ Create a new project using this template:
 Then launch the new Web app by issuing one of the following commands:
 
 ```shell
-lein run <port>
+lein run [host <hostname>] [port <port>]
 ```
 
 You can generate a standalone jar and run it:
