@@ -9,20 +9,17 @@
   (fn [request]
     (binding [*session* (atom {})
               *flash* (atom {})]
-      (when-let [session (get-in request [:session :app-session])]
-        (reset! *session* session))
-      (when-let [flash (get-in request [:session :app-flash])]
-        (reset! *flash* flash))
+      (reset! *session* (:session request))
+      (reset! *flash* (:flash request))
       (let [response (handler request)]
         (-> response
-            (assoc-in [:session :app-session] @*session*)
-            (assoc-in [:session :app-flash] @*flash*))))))
+            (assoc :session @*session*)
+            (assoc :flash @*flash*))))))
 
 (defn- put!
   "Put key/value into target"
   [target k v]
-  (swap! target (fn [old-target]
-                  (assoc old-target k v))))
+  (swap! target #(assoc % k v)))
 
 (defn session-put!
   "Add or update key/value for the current session"
