@@ -2,7 +2,7 @@
   (:require [ring.util.response :as response]
             [stencil.core :as stencil]
             [{{name}}.middleware.context :as context]
-            [{{name}}.util.session :as session]))
+            [{{name}}.middleware.session :as session]))
 
 ;;; Context utils
 (defn get-context-root
@@ -50,7 +50,7 @@
   "Define pages layout"
   [title body]
   (stencil/render-file
-   "{{sanitized}}/view/templates/layout"
+   "movies/view/templates/layout"
    (let [content (base-content title body)
          user (session/current-user)]
      (if (authenticated?)

@@ -2,7 +2,7 @@
     (:require [ring.util.response :as response]
               [compojure.core :refer [defroutes GET POST]]
               [stencil.core :as stencil]
-              [{{name}}.util.session :as session]
+              [{{name}}.middleware.session :as session]
               [{{name}}.service.db :as db]
               [{{name}}.view.common :refer [wrap-context-root wrap-layout authenticated?]]))
 
@@ -12,7 +12,7 @@
   (wrap-layout
    "Sign up"
    (stencil/render-file
-    "{{sanitized}}/view/templates/signup"
+    "movies/view/templates/signup"
     {})))
 
 (defn- signup
@@ -38,7 +38,7 @@
   (wrap-layout
    "Log in"
    (stencil/render-file
-    "{{sanitized}}/view/templates/login"
+    "movies/view/templates/login"
     {})))
 
 (defn- auth
@@ -67,7 +67,7 @@
   (wrap-layout
    "Reset password"
    (stencil/render-file
-    "{{sanitized}}/view/templates/reset-pass"
+    "movies/view/templates/reset-pass"
     {})))
 
 (defn- reset-pass
@@ -86,7 +86,7 @@
 (defn- logout
   "Process user logout."
   [request]
-  (session/logout)
+  (session/clear)
   (response/redirect (wrap-context-root "/")))
 
 (defroutes auth-routes

@@ -39,7 +39,6 @@
              ["src/{{sanitized}}/app.clj" (render "src/app.clj" data)]
              ["src/{{sanitized}}/middleware/session.clj" (render "src/middleware/session.clj" data)]
              ["src/{{sanitized}}/middleware/context.clj" (render "src/middleware/context.clj" data)]
-             ["src/{{sanitized}}/util/session.clj" (render "src/util/session.clj" data)]
              ["src/{{sanitized}}/service/db.clj" (render "src/service/db.clj" data)]
              ["src/{{sanitized}}/view/about.clj" (render "src/view/about.clj" data)]
              ["src/{{sanitized}}/view/auth.clj" (render "src/view/auth.clj" data)]

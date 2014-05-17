@@ -1,10 +1,15 @@
-(ns {{name}}.middleware.session)
+(ns {{name}}.middleware.session
+  (:refer-clojure :exclude [get remove]))
 
-(declare ^:dynamic *session*)
-(declare ^:dynamic *flash*)
+(def ^{:dynamic true :private true} *session*)
+(def ^{:dynamic true :private true} *flash*)
+
+;;
+;; Session wrapper
+;;
 
 (defn wrap-session
-  "Store session into a Clojure map"
+  "Store session into a var for easy access."
   [handler]
   (fn [request]
     (binding [*session* (atom {})
@@ -16,35 +21,57 @@
             (assoc :session @*session*)
             (assoc :flash @*flash*))))))
 
-(defn- put!
+;; 
+;; Session management
+;;
+
+(defn- put-to-target!
   "Put key/value into target"
   [target k v]
-  (swap! target #(assoc % k v)))
+  (swap! target assoc k v))
 
-(defn session-put!
+(defn put!
   "Add or update key/value for the current session"
   [k v]
-  (put! *session* k v))
+  (put-to-target! *session* k v))
 
-(defn session-get
+(defn get
   "Get the value associated to a key for the current session"
   [k]
   (@*session* k))
 
-(defn session-clear
+(defn remove
+  "Remove key/value from current session."
+  [k]
+  (swap! *session* dissoc k))
+
+(defn clear
   "Clear the current session"
   []
   (reset! *session* {}))
 
+(defn set-user! 
+  "Set the current user."
+  [user]
+  (put! :user user))
+
+(defn current-user
+  "Retrieve the current user."
+  []
+  (get :user))
+
+;;
+;; Flash management
+;;
+
 (defn flash-put!
   "Add or update key/value flash"
   [k v]
-  (put! *flash* k v))
+  (put-to-target! *flash* k v))
 
 (defn flash-get
   "Get the value associated to a key in the flash and remove this key/value"
   [k]
   (let [v (@*flash* k)]
-    (swap! *flash* (fn [old-flash]
-                     (dissoc old-flash k)))
+    (swap! *flash* dissoc k)
     v))
