@@ -50,7 +50,7 @@
   "Define pages layout"
   [title body]
   (stencil/render-file
-   "movies/view/templates/layout"
+   "{{name}}/view/templates/layout"
    (let [content (base-content title body)
          user (session/current-user)]
      (if (authenticated?)

@@ -12,7 +12,7 @@
   (wrap-layout
    "Sign up"
    (stencil/render-file
-    "movies/view/templates/signup"
+    "{{name}}/view/templates/signup"
     {})))
 
 (defn- signup
@@ -38,7 +38,7 @@
   (wrap-layout
    "Log in"
    (stencil/render-file
-    "movies/view/templates/login"
+    "{{name}}/view/templates/login"
     {})))
 
 (defn- auth
@@ -67,7 +67,7 @@
   (wrap-layout
    "Reset password"
    (stencil/render-file
-    "movies/view/templates/reset-pass"
+    "{{name}}/view/templates/reset-pass"
     {})))
 
 (defn- reset-pass
