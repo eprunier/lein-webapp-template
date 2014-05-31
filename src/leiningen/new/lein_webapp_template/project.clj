@@ -13,4 +13,4 @@
                    :source-paths ["dev"]}}
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler {{name}}.app/site-handler}
-  :main {{name}})
+  :main {{name}}.server)

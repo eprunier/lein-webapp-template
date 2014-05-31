@@ -34,7 +34,7 @@
              ["project.clj" (render "project.clj" data)]
              ["README.md" (render "README.md" data)]
              ["dev/user.clj" (render "dev/user.clj" data)]
-             ["src/{{sanitized}}.clj" (render "system.clj" data)]
+             ["src/{{sanitized}}/config.clj" (render "src/config.clj" data)]
              ["src/{{sanitized}}/server.clj" (render "src/server.clj" data)]
              ["src/{{sanitized}}/app.clj" (render "src/app.clj" data)]
              ["src/{{sanitized}}/middleware/session.clj" (render "src/middleware/session.clj" data)]

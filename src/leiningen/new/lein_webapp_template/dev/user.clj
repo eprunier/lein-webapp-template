@@ -11,33 +11,33 @@
    [clojure.string :as str]
    [clojure.test :as test]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]
-   [{{name}}]))
+   [{{name}}.server :as server]))
 
-(def system
-  "A Var containing an object representing the application under
-  development."
-  nil)
+;; Map containing the application under development.
+(defonce system {})
 
 (defn init
-  "Creates and initializes the system under development in the Var
-  #'system."
+  "Initializes system properties"
   []
-  (alter-var-root #'system
-                  (constantly ({{name}}/system))))
+  (System/setProperty "server.host" "localhost")
+  (System/setProperty "server.port" "8080"))
 
 (defn start
   "Starts the system running, updates the Var #'system."
   []
   (alter-var-root #'system
-                  {{name}}/start))
+                  #(merge % {:server (server/start)})))
 
 (defn stop
   "Stops the system if it is currently running, updates the Var
   #'system."
   []
   (alter-var-root #'system
-                  (fn [s]
-                    (when s ({{name}}/stop s)))))
+                  (fn [{s :server :as system}]
+                    (when s 
+                      (do
+                        (server/stop s)
+                        (dissoc system :server))))))
 
 (defn go
   "Initializes and starts the system running."
