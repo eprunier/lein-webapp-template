@@ -19,5 +19,5 @@
   "Add a new user to database."
   [{:keys [username] :as user}]
   (when (and username
-           (not (get-user username)))
+             (not (get-user username)))
     (swap! database assoc (:username user) user)))

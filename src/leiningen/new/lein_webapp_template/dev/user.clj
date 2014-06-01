@@ -51,3 +51,8 @@
   []
   (stop)
   (refresh :after 'user/go))
+
+(defn reset-db
+  "Reset database."
+  []
+  (reset! {{name}}.service.db/database {}))

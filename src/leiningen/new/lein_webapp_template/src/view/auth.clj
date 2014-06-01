@@ -4,7 +4,7 @@
               [stencil.core :as stencil]
               [{{name}}.middleware.session :as session]
               [{{name}}.service.db :as db]
-              [{{name}}.view.common :refer [wrap-context-root wrap-layout authenticated?]]))
+              [{{name}}.view.common :refer [url wrap-layout authenticated?]]))
 
 (defn- signup-page
   "Render the signup page."
@@ -87,7 +87,7 @@
   "Process user logout."
   [request]
   (session/clear)
-  (response/redirect (wrap-context-root "/")))
+  (response/redirect (url "/")))
 
 (defroutes auth-routes
   (GET "/signup" request (signup-page request))
