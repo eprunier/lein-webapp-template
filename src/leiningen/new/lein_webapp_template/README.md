@@ -6,14 +6,14 @@ FIXME
 Launch the application by issuing one of the following commands:
 
 ```shell
-lein run [host <host>] [port <port>]
+SERVER_HOST=localhost SERVER_PORT=8080 lein run
 ```
 
 You can generate a standalone jar and run it:
 
 ```shell   
 lein uberjar
-java -jar target/{{name}}-0.1.0-SNAPSHOT-standalone.jar
+java -Dserver.host=localhost -Dserver.port=8080 -jar target/{{name}}-0.1.0-SNAPSHOT-standalone.jar
 ```
 
 You can also generate a war to deploy on a server like Tomcat, Jboss...
