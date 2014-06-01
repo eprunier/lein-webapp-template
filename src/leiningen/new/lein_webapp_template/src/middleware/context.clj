@@ -14,7 +14,7 @@
   []
   *context-root*)
 
-(defn with-context-root
-  "Add the context root to the URL."
-  [url]
-  (str (get-context-root) url))
+(defn url
+  "Add the context root to the URL path."
+  [path]
+  (str (get-context-root) path))

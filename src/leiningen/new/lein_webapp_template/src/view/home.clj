@@ -1,7 +1,8 @@
 (ns {{name}}.view.home
     (:require [compojure.core :refer [defroutes GET]]
               [stencil.core :as stencil]
-              [{{name}}.view.common :refer [wrap-layout authenticated?]]))
+              [{{name}}.service.security :refer [authenticated?]]
+              [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- render-home [request]
   (stencil/render-file

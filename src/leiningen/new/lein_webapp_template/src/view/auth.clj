@@ -2,9 +2,11 @@
     (:require [ring.util.response :as response]
               [compojure.core :refer [defroutes GET POST]]
               [stencil.core :as stencil]
+              [{{name}}.middleware.context :refer [url]]
               [{{name}}.middleware.session :as session]
+              [{{name}}.service.security :refer [authenticated?]]
               [{{name}}.service.db :as db]
-              [{{name}}.view.common :refer [url wrap-layout authenticated?]]))
+              [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- signup-page
   "Render the signup page."

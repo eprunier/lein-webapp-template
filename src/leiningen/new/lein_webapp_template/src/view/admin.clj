@@ -1,7 +1,8 @@
 (ns {{name}}.view.admin
   (:require [compojure.core :refer [defroutes GET]]
             [stencil.core :as stencil]
-            [{{name}}.view.common :refer [restricted admin? wrap-layout]]))
+            [{{name}}.service.security :refer [restricted admin?]]
+            [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- page-body []
   (stencil/render-file

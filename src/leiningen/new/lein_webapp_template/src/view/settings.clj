@@ -1,7 +1,8 @@
 (ns {{name}}.view.settings
   (:require [compojure.core :refer [defroutes GET]]
             [stencil.core :as stencil]
-            [{{name}}.view.common :refer [restricted authenticated? wrap-layout]]))
+            [{{name}}.service.security :refer [restricted authenticated?]]
+            [{{name}}.view.common :refer [wrap-layout]]))
 
 (defn- page-body []
   (stencil/render-file
